@@ -162,27 +162,27 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-purple-600 to-secondary">
+    <div className="min-h-screen bg-background">
       {/* Notification */}
       {notification.show && (
-        <div className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg animate-slideUp ${
-          notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'
-        } text-white font-medium`}>
+        <div className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-md shadow-card animate-slideUp ${
+          notification.type === 'success' ? 'bg-success' : 'bg-red-500'
+        } text-white font-semibold`}>
           {notification.message}
         </div>
       )}
 
       {/* Header */}
-      <header className="bg-white bg-opacity-10 backdrop-blur-md shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <header className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-white">CI/CD Workflow Generator</h1>
-              <p className="text-gray-100 mt-1">Generate GitHub Actions workflows in seconds</p>
+              <h1 className="text-2xl font-semibold text-primary-600">CI/CD Workflow Generator</h1>
+              <p className="text-gray-600 text-sm mt-1">Generate GitHub Actions workflows in seconds</p>
             </div>
             <button
               onClick={() => setShowHistory(!showHistory)}
-              className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-lg transition-all duration-200 backdrop-blur-sm border border-white border-opacity-20"
+              className="px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-md transition-all duration-200 font-medium text-sm"
             >
               {showHistory ? 'Hide' : 'Show'} History ({configs.length})
             </button>
@@ -195,17 +195,18 @@ function App() {
           {/* Configuration Panel */}
           <div className="lg:col-span-1 space-y-6">
             {/* Language Selection */}
-            <div className="bg-white rounded-xl shadow-xl p-6 animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Language</h2>
-              <div className="grid grid-cols-2 gap-3">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-4 animate-fadeIn">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Language</h2>
+              <p className="text-sm text-gray-600 mb-4">Select your programming language</p>
+              <div className="grid grid-cols-2 gap-2">
                 {['python', 'nodejs', 'java', 'go', 'docker'].map((lang) => (
                   <button
                     key={lang}
                     onClick={() => setLanguage(lang)}
-                    className={`p-3 rounded-lg font-medium transition-all duration-200 ${
+                    className={`px-4 py-2 rounded-md font-medium transition-all duration-200 text-sm border-2 ${
                       language === lang
-                        ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg transform scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-primary-50 border-primary-600 text-primary-700 shadow-soft'
+                        : 'bg-white border-gray-200 text-gray-700 hover:border-primary-500 hover:shadow-soft'
                     }`}
                   >
                     {lang.charAt(0).toUpperCase() + lang.slice(1)}
@@ -215,18 +216,19 @@ function App() {
             </div>
 
             {/* Platform Selection */}
-            <div className="bg-white rounded-xl shadow-xl p-6 animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Platform</h2>
-              <div className="grid grid-cols-1 gap-3">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-4 animate-fadeIn">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Platform</h2>
+              <p className="text-sm text-gray-600 mb-4">Choose your deployment platform</p>
+              <div className="grid grid-cols-1 gap-2">
                 {language === 'docker'
                   ? ['azure', 'aws', 'dockerhub'].map((plat) => (
                       <button
                         key={plat}
                         onClick={() => setPlatform(plat)}
-                        className={`p-3 rounded-lg font-medium transition-all duration-200 ${
+                        className={`px-4 py-2 rounded-md font-medium transition-all duration-200 text-sm border-2 ${
                           platform === plat
-                            ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ? 'bg-primary-50 border-primary-600 text-primary-700 shadow-soft'
+                            : 'bg-white border-gray-200 text-gray-700 hover:border-primary-500 hover:shadow-soft'
                         }`}
                       >
                         {plat === 'dockerhub' ? 'Docker Hub' : plat.toUpperCase()}
@@ -236,10 +238,10 @@ function App() {
                       <button
                         key={plat}
                         onClick={() => setPlatform(plat)}
-                        className={`p-3 rounded-lg font-medium transition-all duration-200 ${
+                        className={`px-4 py-2 rounded-md font-medium transition-all duration-200 text-sm border-2 ${
                           platform === plat
-                            ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            ? 'bg-primary-50 border-primary-600 text-primary-700 shadow-soft'
+                            : 'bg-white border-gray-200 text-gray-700 hover:border-primary-500 hover:shadow-soft'
                         }`}
                       >
                         {plat === 'aws' ? 'AWS' : plat.charAt(0).toUpperCase() + plat.slice(1)}
@@ -250,17 +252,18 @@ function App() {
             </div>
 
             {/* Framework Selection */}
-            <div className="bg-white rounded-xl shadow-xl p-6 animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Framework</h2>
-              <div className="grid grid-cols-1 gap-3">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-4 animate-fadeIn">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Framework</h2>
+              <p className="text-sm text-gray-600 mb-4">Select your framework or service</p>
+              <div className="grid grid-cols-1 gap-2">
                 {frameworkOptions[language]?.map((fw) => (
                   <button
                     key={fw}
                     onClick={() => setFramework(fw)}
-                    className={`p-3 rounded-lg font-medium transition-all duration-200 ${
+                    className={`px-4 py-2 rounded-md font-medium transition-all duration-200 text-sm border-2 ${
                       framework === fw
-                        ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-primary-50 border-primary-600 text-primary-700 shadow-soft'
+                        : 'bg-white border-gray-200 text-gray-700 hover:border-primary-500 hover:shadow-soft'
                     }`}
                   >
                     {fw.charAt(0).toUpperCase() + fw.slice(1)}
@@ -270,8 +273,9 @@ function App() {
             </div>
 
             {/* Options */}
-            <div className="bg-white rounded-xl shadow-xl p-6 animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Options</h2>
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-4 animate-fadeIn">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Options</h2>
+              <p className="text-sm text-gray-600 mb-4">Configure additional settings</p>
               <div className="space-y-3">
                 {[
                   { key: 'cache', label: 'Enable Caching', description: 'Cache dependencies for faster builds' },
@@ -283,13 +287,13 @@ function App() {
                       type="checkbox"
                       checked={options[option.key]}
                       onChange={(e) => setOptions({ ...options, [option.key]: e.target.checked })}
-                      className="mt-1 h-5 w-5 text-primary rounded focus:ring-primary cursor-pointer"
+                      className="mt-1 h-4 w-4 text-primary-600 rounded border-gray-300 focus:ring-primary-500 cursor-pointer"
                     />
                     <div className="flex-1">
-                      <div className="font-medium text-gray-800 group-hover:text-primary transition-colors">
+                      <div className="font-medium text-gray-700 text-sm group-hover:text-primary-600 transition-colors">
                         {option.label}
                       </div>
-                      <div className="text-sm text-gray-500">{option.description}</div>
+                      <div className="text-xs text-gray-500 mt-0.5">{option.description}</div>
                     </div>
                   </label>
                 ))}
@@ -297,16 +301,16 @@ function App() {
             </div>
 
             {/* Action Buttons */}
-            <div className="bg-white rounded-xl shadow-xl p-6 animate-fadeIn space-y-3">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-4 animate-fadeIn space-y-2">
               <button
                 onClick={handleSaveConfig}
-                className="w-full px-4 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="w-full px-4 py-2.5 bg-success text-white rounded-md font-semibold hover:bg-green-600 transition-all duration-200 shadow-soft hover:shadow-card text-sm"
               >
                 Save Configuration
               </button>
               <button
                 onClick={handleShareConfig}
-                className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="w-full px-4 py-2.5 bg-accent text-white rounded-md font-semibold hover:bg-blue-600 transition-all duration-200 shadow-soft hover:shadow-card text-sm"
               >
                 Share Configuration
               </button>
@@ -316,52 +320,54 @@ function App() {
           {/* Editor Panel */}
           <div className="lg:col-span-2 space-y-6">
             {/* Code Editor */}
-            <div className="bg-white rounded-xl shadow-xl overflow-hidden animate-fadeIn">
-              <div className="bg-gray-800 px-6 py-4 flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-white">Generated Workflow</h2>
+            <div className="bg-white rounded-lg border-2 border-gray-200 overflow-hidden animate-fadeIn shadow-soft">
+              <div className="bg-secondary-500 px-6 py-3 flex items-center justify-between border-b border-gray-300">
+                <h2 className="text-base font-semibold text-white">Generated Workflow</h2>
                 <div className="flex space-x-2">
                   <button
                     onClick={handleCopyWorkflow}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors duration-200"
+                    className="px-4 py-2 bg-white border border-gray-200 text-primary-600 text-sm rounded-md font-medium hover:bg-gray-50 transition-colors duration-200"
                   >
                     Copy
                   </button>
                   <button
                     onClick={handleDownload}
-                    className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors duration-200"
+                    className="px-4 py-2 bg-white border border-gray-200 text-primary-600 text-sm rounded-md font-medium hover:bg-gray-50 transition-colors duration-200"
                   >
                     Download
                   </button>
                 </div>
               </div>
-              <Editor
-                height="600px"
-                defaultLanguage="yaml"
-                value={generatedWorkflow}
-                onChange={(value) => setGeneratedWorkflow(value || '')}
-                theme="vs-dark"
-                options={{
-                  minimap: { enabled: false },
-                  fontSize: 14,
-                  lineNumbers: 'on',
-                  roundedSelection: false,
-                  scrollBeyondLastLine: false,
-                  readOnly: false,
-                  automaticLayout: true,
-                }}
-              />
+              <div className="border-t border-gray-200">
+                <Editor
+                  height="600px"
+                  defaultLanguage="yaml"
+                  value={generatedWorkflow}
+                  onChange={(value) => setGeneratedWorkflow(value || '')}
+                  theme="vs-dark"
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: 14,
+                    lineNumbers: 'on',
+                    roundedSelection: false,
+                    scrollBeyondLastLine: false,
+                    readOnly: false,
+                    automaticLayout: true,
+                  }}
+                />
+              </div>
             </div>
 
             {/* Instructions */}
-            <div className="bg-white rounded-xl shadow-xl p-6 animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">How to Use</h2>
-              <ol className="list-decimal list-inside space-y-2 text-gray-700">
+            <div className="bg-white rounded-lg border-2 border-gray-200 p-6 animate-fadeIn">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">How to Use</h2>
+              <ol className="list-decimal list-inside space-y-2 text-gray-700 text-sm">
                 <li>Select your programming language, deployment platform, and framework</li>
                 <li>Configure options like caching, tests, and optimization</li>
                 <li>The workflow will be generated automatically</li>
                 <li>Copy or download the workflow file</li>
-                <li>Create <code className="bg-gray-100 px-2 py-1 rounded">.github/workflows/</code> directory in your repository</li>
-                <li>Save the workflow as <code className="bg-gray-100 px-2 py-1 rounded">deploy.yml</code> in that directory</li>
+                <li>Create <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono">.github/workflows/</code> directory in your repository</li>
+                <li>Save the workflow as <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono">deploy.yml</code> in that directory</li>
                 <li>Configure required secrets in your GitHub repository settings</li>
                 <li>Push to your repository and watch the magic happen!</li>
               </ol>
@@ -382,9 +388,9 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-12 py-6 text-center text-white text-sm bg-white bg-opacity-10 backdrop-blur-md">
-        <p>Built with React, Vite, and Tailwind CSS</p>
-        <p className="mt-2">Open source CI/CD workflow generator for GitHub Actions</p>
+      <footer className="mt-12 py-6 text-center text-sm bg-white border-t border-gray-200">
+        <p className="text-gray-600">Built with React, Vite, and Tailwind CSS</p>
+        <p className="mt-2 text-gray-500">Open source CI/CD workflow generator for GitHub Actions</p>
       </footer>
     </div>
   );
